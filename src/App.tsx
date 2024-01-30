@@ -3,8 +3,9 @@ import Carousel from "react-material-ui-carousel";
 import * as imgs from "@/assets/imgs";
 import ImgCard from "./components/ImgCard";
 import catVideo from "@/assets/videos/cat_video.mp4";
-import CustomModal from "./components/CustomModal";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
+
+const CustomModal = lazy(() => import("@/components/CustomModal"));
 
 function App() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -29,21 +30,6 @@ function App() {
                 </nav>
             </header>
             <main className="flex-1">
-                <section className="w-full py-12 md:py-24 lg:py-5">
-                    <div className="container px-4 md:px-6">
-                        <p className="text-gray-500 md:text-2xl lg:text-[36px]">
-                            {"가나다라마바사아자차카타파하"}
-                            <br />
-                            {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}
-                            <br />
-                            {"abcdefghijklmnopqrstuvwxyz"}
-                            <br />
-                            {"0123456789"}
-                            <br />
-                            {"~`!@#$%^&*()-_=+[{]}|’”/?,<.>:;"}
-                        </p>
-                    </div>
-                </section>
                 <section className="w-full py-12 md:py-24 lg:py-32">
                     <Carousel>
                         {images.map((src, index) => (
@@ -67,11 +53,28 @@ function App() {
                         </div>
                     </div>
                 </section>
+                <section className="w-full py-12 md:py-24 lg:py-5">
+                    <div className="container px-4 md:px-6">
+                        <p className="text-gray-500 md:text-2xl lg:text-[36px]">
+                            {"가나다라마바사아자차카타파하"}
+                            <br />
+                            {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}
+                            <br />
+                            {"abcdefghijklmnopqrstuvwxyz"}
+                            <br />
+                            {"0123456789"}
+                            <br />
+                            {"~`!@#$%^&*()-_=+[{]}|’”/?,<.>:;"}
+                        </p>
+                    </div>
+                </section>
             </main>
             <footer className="w-full h-20 flex items-center justify-center px-4 md:px-6 border-t">
-                <p className="text-sm text-gray-500 dark:text-gray-400">© 2024 Acme Inc. All rights reserved.</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Footer Contents Here</p>
             </footer>
-            <CustomModal src={modalImg} isOpen={isOpen} onOpenChange={onOpenChange} />
+            <Suspense fallback={<div>Modal Component Loading...</div>}>
+                <CustomModal src={modalImg} isOpen={isOpen} onOpenChange={onOpenChange} />
+            </Suspense>
         </div>
     );
 }

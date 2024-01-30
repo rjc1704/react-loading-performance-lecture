@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
 export default function ImgCard({ src, handleClick = () => {} }: { src: string; handleClick?: (src: string) => void }) {
     return (
@@ -10,7 +10,7 @@ export default function ImgCard({ src, handleClick = () => {} }: { src: string; 
                     <h4 className="font-bold text-large">Frontend Radio</h4>
                 </CardHeader>
                 <CardBody className="overflow-hidden py-2 rounded-xl h-[185px]">
-                    <Image alt="Card background" className="w-full h-full object-cover" removeWrapper src={src} width={270} height={175} />
+                    <img alt="Card background" className="w-full h-full object-cover" src={src} width={270} height={175} />
                 </CardBody>
             </Card>
         </div>
