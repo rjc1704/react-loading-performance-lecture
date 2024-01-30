@@ -7,7 +7,7 @@
     src: url("/src/assets/fonts/SingleDay-Regular.ttf") format("truetype");
     font-display: fallback;
 }
-
+@import "~react-image-gallery/styles/css/image-gallery.css";
 * {
     font-family: "SingleDay-Regular";
 }

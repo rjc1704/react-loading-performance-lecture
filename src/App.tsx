@@ -3,23 +3,18 @@ import Carousel from "react-material-ui-carousel";
 import * as imgs from "@/assets/imgs";
 import ImgCard from "./components/ImgCard";
 import catVideo from "@/assets/videos/cat_video.mp4";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense } from "react";
 
 const CustomModal = lazy(() => import("@/components/CustomModal"));
 
 function App() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const images = [imgs.cat1, imgs.cat2, imgs.cat3, imgs.cat4];
-    const [modalImg, setModalImg] = useState(images[0]);
-    const handleCardClick = (src: string) => {
-        setModalImg(src);
-        onOpen();
-    };
+
     return (
         <div className="w-[1200px] flex flex-col mx-auto">
             <header className="w-full h-20 flex items-center justify-between px-4 md:px-6 text-xl">
                 <div className="flex items-center justify-center">
-                    {/* <Avatar className="h-6 w-6" /> */}
                     <span>리액트 로딩 최적화</span>
                 </div>
                 <nav className="flex gap-4 sm:gap-6">
@@ -48,7 +43,7 @@ function App() {
                     <div className="container px-4 md:px-6">
                         <div className="cursor-pointer  grid gap-6 lg:grid-cols-3 lg:gap-12">
                             {images.map((src) => (
-                                <ImgCard key={src} src={src} handleClick={handleCardClick} />
+                                <ImgCard key={src} src={src} handleClick={onOpen} />
                             ))}
                         </div>
                     </div>
@@ -73,7 +68,7 @@ function App() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">Footer Contents Here</p>
             </footer>
             <Suspense fallback={<div>Modal Component Loading...</div>}>
-                <CustomModal src={modalImg} isOpen={isOpen} onOpenChange={onOpenChange} />
+                <CustomModal isOpen={isOpen} onOpenChange={onOpenChange} />
             </Suspense>
         </div>
     );
