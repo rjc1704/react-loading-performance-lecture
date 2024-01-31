@@ -9,7 +9,7 @@ const CustomModal = lazy(() => import("@/components/CustomModal"));
 
 function App() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const images = [imgs.cat1, imgs.cat2, imgs.cat3, imgs.cat4];
+    const images = Object.values(imgs);
 
     return (
         <div className="w-[1200px] flex flex-col mx-auto">
