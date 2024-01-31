@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~react-image-gallery/styles/css/image-gallery.css";
 @font-face {
     font-family: "SingleDay-Regular";
     src: url("/src/assets/fonts/SingleDay-Regular.ttf") format("truetype");

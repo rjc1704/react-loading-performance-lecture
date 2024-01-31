@@ -1,15 +1,16 @@
 import { useDisclosure } from "@nextui-org/react";
 import Carousel from "react-material-ui-carousel";
-import * as imgs from "@/assets/imgs";
+import { cats } from "@/assets/imgs";
 import ImgCard from "./components/ImgCard";
 import catVideo from "@/assets/videos/cat_video.mp4";
 import { lazy, Suspense } from "react";
+import CloudinaryImage from "./components/CloudinaryImage";
 
 const CustomModal = lazy(() => import("@/components/CustomModal"));
 
 function App() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const images = Object.values(imgs);
+    // const images = Object.values(imgs);
 
     return (
         <div className="w-[1200px] flex flex-col mx-auto">
@@ -26,23 +27,25 @@ function App() {
             </header>
             <main className="flex-1">
                 <section className="w-full py-12 md:py-24 lg:py-32">
-                    <Carousel>
-                        {images.map((src, index) => (
-                            <div key={index} className="relative overflow-hidden rounded-lg h-96">
-                                <img src={src} className="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Carousel Item" />
+                    <Carousel height={384}>
+                        {cats.map((src, idx) => (
+                            <div key={src} className="relative overflow-hidden rounded-lg h-96">
+                                <CloudinaryImage src={src} width={1200} height={384} alt={`cat${idx}`} />
                             </div>
                         ))}
                     </Carousel>
                 </section>
                 <section className="w-full h-[500px] md:h-[700px]">
                     <div className="w-full h-full object-cover">
-                        <video src={catVideo} controls autoPlay muted />
+                        <video src={catVideo} loop autoPlay muted>
+                            <source src={catVideo} type="video/mp4" />
+                        </video>
                     </div>
                 </section>
                 <section className="w-full py-12 md:py-24 lg:py-32">
                     <div className="container px-4 md:px-6">
                         <div className="cursor-pointer  grid gap-6 lg:grid-cols-3 lg:gap-12">
-                            {images.map((src) => (
+                            {cats.map((src) => (
                                 <ImgCard key={src} src={src} handleClick={onOpen} />
                             ))}
                         </div>
