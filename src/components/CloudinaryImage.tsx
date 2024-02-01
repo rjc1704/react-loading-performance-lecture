@@ -1,4 +1,5 @@
 import { getCloudinaryImgUrl } from "@/utils/cdnImage";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 type Props = {
   width: number;
@@ -13,7 +14,8 @@ export default function CloudinaryImage({ width, height, src, alt }: Props) {
   return (
     <picture>
       <source srcSet={formattedUrl} type="image/webp" />
-      <img src={originalUrl} alt={alt} loading="lazy" />
+      <LazyLoadImage src={originalUrl} alt={alt} />
+      {/* <img src={originalUrl} alt={alt} loading="lazy" /> */}
     </picture>
   );
 }

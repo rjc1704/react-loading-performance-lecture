@@ -3,28 +3,31 @@ import Carousel from "react-material-ui-carousel";
 import { cats } from "@/assets/imgs";
 import ImgCard from "./components/ImgCard";
 import catVideo from "@/assets/videos/cat_video.mp4";
-import { lazy, Suspense, useContext, useEffect } from "react";
+import { lazy, Suspense, useRef } from "react";
 import CloudinaryImage from "./components/CloudinaryImage";
 // import ImgGallaryModal from "@/components/ImgGalleryModal";
-import { ImgFormatContext } from "./context/ImgFormatContext";
-import { getCloudinaryImgUrl } from "./utils/cdnImage";
+
+import usePreloadImgs from "./hooks/usePreloadImgs";
 
 const ImgGallaryModal = lazy(() => import("@/components/ImgGalleryModal"));
 
+const FIRST_IMG = cats[0];
+const THUMB_IMG1 = cats[0];
+const THUMB_IMG2 = cats[1];
+const THUMB_IMG3 = cats[2];
+const THUMB_IMG4 = cats[3];
+
 function App() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { supportingWebp } = useContext(ImgFormatContext);
-  const FIRST_IMG = cats[0];
 
-  const preloadImg = ({ src, width, height }: { src: string; width: number; height: number }) => {
-    const image = new Image();
-    const { originalUrl, formattedUrl } = getCloudinaryImgUrl({ width, height, src });
-    image.src = supportingWebp ? formattedUrl : originalUrl;
-  };
-
-  useEffect(() => {
-    preloadImg({ src: FIRST_IMG, width: 400, height: 250 });
-  }, []);
+  const preloadingImgs = useRef([
+    { src: FIRST_IMG, width: 400, height: 250 },
+    { src: THUMB_IMG1, width: 100, height: 60 },
+    { src: THUMB_IMG2, width: 100, height: 60 },
+    { src: THUMB_IMG3, width: 100, height: 60 },
+    { src: THUMB_IMG4, width: 100, height: 60 }
+  ]);
+  usePreloadImgs(preloadingImgs.current);
 
   return (
     <div className="w-[1200px] flex flex-col mx-auto">
