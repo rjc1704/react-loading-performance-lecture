@@ -1,19 +1,21 @@
 const CracoAlias = require("craco-alias");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-
-const isProduction = process.env.NODE_ENV === "production";
+const FontPreloadPlugin = require("webpack-font-preload-plugin");
 
 module.exports = {
-    plugins: [
-        {
-            plugin: CracoAlias,
-            options: {
-                source: "tsconfig",
-                tsConfigPath: "tsconfig.paths.json"
-            }
-        }
-    ],
-    webpack: {
-        plugins: isProduction ? [] : [new BundleAnalyzerPlugin()]
+  plugins: [
+    {
+      plugin: CracoAlias,
+      options: {
+        source: "tsconfig",
+        tsConfigPath: "tsconfig.paths.json"
+      }
     }
+  ],
+  webpack: {
+    plugins: [
+      new FontPreloadPlugin({
+        extensions: ["woff2"]
+      })
+    ]
+  }
 };

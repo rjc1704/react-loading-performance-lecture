@@ -52,13 +52,6 @@ function App() {
             ))}
           </Carousel>
         </section>
-        <section className="w-full h-[500px] md:h-[700px]">
-          <div className="w-full h-full object-cover">
-            <video src={catVideo} loop autoPlay muted>
-              <source src={catVideo} type="video/mp4" />
-            </video>
-          </div>
-        </section>
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="cursor-pointer  grid gap-6 lg:grid-cols-3 lg:gap-12">
