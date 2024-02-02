@@ -1,5 +1,4 @@
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
-import CloudinaryImage from "./CloudinaryImage";
 
 export default function ImgCard({ src, handleClick = () => {} }: { src: string; handleClick?: (src: string) => void }) {
   return (
@@ -11,8 +10,7 @@ export default function ImgCard({ src, handleClick = () => {} }: { src: string; 
           <h4 className="font-bold text-large">Frontend Radio</h4>
         </CardHeader>
         <CardBody className="overflow-hidden py-2 rounded-xl h-[185px]">
-          {/* <img alt="Card background" className="w-full h-full object-cover" src={src} width={270} height={175} /> */}
-          <CloudinaryImage src={src} width={270} height={175} alt="card background" />
+          <img src={src} width={270} height={175} alt="Card background" />
         </CardBody>
       </Card>
     </div>

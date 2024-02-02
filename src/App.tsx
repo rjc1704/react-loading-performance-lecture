@@ -2,32 +2,10 @@ import { useDisclosure } from "@nextui-org/react";
 import Carousel from "react-material-ui-carousel";
 import { cats } from "@/assets/imgs";
 import ImgCard from "./components/ImgCard";
-import catVideo from "@/assets/videos/cat_video.mp4";
-import { lazy, Suspense, useRef } from "react";
-import CloudinaryImage from "./components/CloudinaryImage";
-// import ImgGallaryModal from "@/components/ImgGalleryModal";
-
-import usePreloadImgs from "./hooks/usePreloadImgs";
-
-const ImgGallaryModal = lazy(() => import("@/components/ImgGalleryModal"));
-
-const FIRST_IMG = cats[0];
-const THUMB_IMG1 = cats[0];
-const THUMB_IMG2 = cats[1];
-const THUMB_IMG3 = cats[2];
-const THUMB_IMG4 = cats[3];
+import ImgGallaryModal from "@/components/ImgGalleryModal";
 
 function App() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const preloadingImgs = useRef([
-    { src: FIRST_IMG, width: 400, height: 250 },
-    { src: THUMB_IMG1, width: 100, height: 60 },
-    { src: THUMB_IMG2, width: 100, height: 60 },
-    { src: THUMB_IMG3, width: 100, height: 60 },
-    { src: THUMB_IMG4, width: 100, height: 60 }
-  ]);
-  usePreloadImgs(preloadingImgs.current);
 
   return (
     <div className="w-[1200px] flex flex-col mx-auto">
@@ -37,17 +15,16 @@ function App() {
         </div>
         <nav className="flex gap-4 sm:gap-6">
           <div className="text-sm font-medium hover:underline underline-offset-4">이미지</div>
-          <div className="text-sm font-medium hover:underline underline-offset-4">동영상</div>
           <div className="text-sm font-medium hover:underline underline-offset-4">폰트</div>
           <div className="text-sm font-medium hover:underline underline-offset-4">코드스플리팅</div>
         </nav>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
-          <Carousel height={384}>
+          <Carousel>
             {cats.map((src, idx) => (
               <div key={src} className="relative overflow-hidden rounded-lg h-96">
-                <CloudinaryImage src={src} width={1200} height={384} alt={`cat${idx}`} />
+                <img src={src} alt={`cat${idx}`} />
               </div>
             ))}
           </Carousel>
@@ -80,9 +57,8 @@ function App() {
       <footer className="w-full h-20 flex items-center justify-center px-4 md:px-6 border-t">
         <p className="text-sm text-gray-500 dark:text-gray-400">Footer Contents Here</p>
       </footer>
-      <Suspense fallback={<div>Modal Component Loading...</div>}>
-        <ImgGallaryModal isOpen={isOpen} onOpenChange={onOpenChange} images={cats} />
-      </Suspense>
+
+      <ImgGallaryModal isOpen={isOpen} onOpenChange={onOpenChange} images={cats} />
     </div>
   );
 }
