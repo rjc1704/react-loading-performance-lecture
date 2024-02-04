@@ -1,6 +1,6 @@
 import { useDisclosure } from "@nextui-org/react";
 import Carousel from "react-material-ui-carousel";
-import { cats } from "@/assets/imgs";
+import { cardImgs, bannerImgs } from "@/assets/imgs";
 import ImgCard from "./components/ImgCard";
 import ImgGallaryModal from "@/components/ImgGalleryModal";
 
@@ -22,9 +22,9 @@ function App() {
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
           <Carousel>
-            {cats.map((src, idx) => (
+            {bannerImgs.map((src, idx) => (
               <div key={src} className="relative overflow-hidden rounded-lg h-96">
-                <img src={src} alt={`cat${idx}`} />
+                <img src={src} alt={`cat${idx}`} className="w-full h-full object-cover" />
               </div>
             ))}
           </Carousel>
@@ -32,7 +32,7 @@ function App() {
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="cursor-pointer  grid gap-6 lg:grid-cols-3 lg:gap-12">
-              {cats.map((src) => (
+              {cardImgs.map((src) => (
                 <ImgCard key={src} src={src} handleClick={onOpen} />
               ))}
             </div>
@@ -58,7 +58,7 @@ function App() {
         <p className="text-sm text-gray-500 dark:text-gray-400">Footer Contents Here</p>
       </footer>
 
-      <ImgGallaryModal isOpen={isOpen} onOpenChange={onOpenChange} images={cats} />
+      <ImgGallaryModal isOpen={isOpen} onOpenChange={onOpenChange} images={cardImgs} />
     </div>
   );
 }

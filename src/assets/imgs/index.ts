@@ -5,8 +5,11 @@ import cat4 from "./cat4.jpg";
 import cat5 from "./cat5.jpg";
 import cat6 from "./cat6.jpg";
 import cat7 from "./cat7.jpg";
+import banner1 from "./banner1.jpg";
+import banner2 from "./banner2.jpg";
 
-export const cats = [cat1, cat2, cat3, cat4, cat5, cat6, cat7];
+export const bannerImgs = [banner1, banner2];
+export const cardImgs = [cat1, cat2, cat3, cat4, cat5, cat6, cat7];
 // export const cats = [
 //   "https://res.cloudinary.com/dv8ifoygg/image/upload/v1706662293/cat1_s8bmgr.jpg",
 //   "https://res.cloudinary.com/dv8ifoygg/image/upload/v1706662293/cat2_xhofby.jpg",
