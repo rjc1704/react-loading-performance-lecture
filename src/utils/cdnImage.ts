@@ -22,3 +22,13 @@ export const checkSupportWebP = (): Promise<boolean> => {
     img.src = "data:image/webp;base64,UklGRi4AAABXRUJQVlA4TCEAAAAvAUAAEB8wAiMwAgSSNtse/cXjxyCCmrYNWPwmHRH9jwMA";
   });
 };
+
+type PreloadImg = { src: string; width: number; height: number };
+export const preloadImgs = (imgs: PreloadImg[], supportingWebp: boolean) => {
+  imgs.forEach((img) => {
+    const { width, height, src } = img;
+    const image = new Image();
+    const { originalUrl, formattedUrl } = getCloudinaryImgUrl({ width, height, src });
+    image.src = supportingWebp ? formattedUrl : originalUrl;
+  });
+};

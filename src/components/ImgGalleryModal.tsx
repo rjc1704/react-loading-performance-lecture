@@ -1,18 +1,26 @@
+import { ImgFormatContext } from "@/context/ImgFormatContext";
+import { getCloudinaryImgUrl } from "@/utils/cdnImage";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@nextui-org/react";
+import { useContext } from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 
 export default function ImgGallaryModal({ isOpen, onOpenChange, images }: { isOpen: boolean; onOpenChange: () => void; images: string[] }) {
+  const { supportingWebp } = useContext(ImgFormatContext);
   const IMG_WIDTH = 400;
   const IMG_HEIGHT = 250;
   const THUMBNAIL_IMG_WIDTH = 100;
   const THUMBNAIL_IMG_HEIGHT = 60;
 
   const items = images.map((src) => {
+    const { originalUrl, formattedUrl } = getCloudinaryImgUrl({ width: IMG_WIDTH, height: IMG_HEIGHT, src });
+    const { originalUrl: thumbUrl, formattedUrl: thumbWebpUrl } = getCloudinaryImgUrl({ width: THUMBNAIL_IMG_WIDTH, height: THUMBNAIL_IMG_HEIGHT, src });
     return {
-      original: src,
+      original: supportingWebp ? formattedUrl : originalUrl,
       originalClass: `w-[${IMG_WIDTH}px] h-[${IMG_HEIGHT}px] overflow-hidden`,
-      thumbnail: src,
-      thumbnailClass: `w-[${THUMBNAIL_IMG_WIDTH}px] h-[${THUMBNAIL_IMG_HEIGHT}px] overflow-hidden`
+      thumbnail: supportingWebp ? thumbWebpUrl : thumbUrl,
+      thumbnailClass: `w-[${THUMBNAIL_IMG_WIDTH}px] h-[${THUMBNAIL_IMG_HEIGHT}px] overflow-hidden`,
+      loading: "lazy",
+      thumbnailLoading: "lazy"
     } as ReactImageGalleryItem;
   });
   return (
